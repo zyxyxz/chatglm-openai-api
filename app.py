@@ -54,62 +54,62 @@ class EmbeddingsBody(BaseModel):
 
 @app.get("/")
 def read_root():
-    return {"Hello": "World!"}
+    return {"Hello":"World!"}
 
 
 @app.get("/v1/models")
 def get_models():
-    ret = {"data": [], "object": "list"}
+    ret = {"data": [], "object":"list"}
 
     if context.model:
         ret['data'].append({
             "created": 1677610602,
-            "id": "gpt-3.5-turbo",
-            "object": "model",
-            "owned_by": "openai",
+            "id":"gpt-3.5-turbo",
+            "object":"model",
+            "owned_by":"openai",
             "permission": [
                 {
                     "created": 1680818747,
-                    "id": "modelperm-fTUZTbzFp7uLLTeMSo9ks6oT",
-                    "object": "model_permission",
+                    "id":"modelperm-fTUZTbzFp7uLLTeMSo9ks6oT",
+                    "object":"model_permission",
                     "allow_create_engine": False,
                     "allow_sampling": True,
                     "allow_logprobs": True,
                     "allow_search_indices": False,
                     "allow_view": True,
                     "allow_fine_tuning": False,
-                    "organization": "*",
+                    "organization":"*",
                     "group": None,
                     "is_blocking": False
                 }
             ],
-            "root": "gpt-3.5-turbo",
+            "root":"gpt-3.5-turbo",
             "parent": None,
         })
     if context.embeddings_model:
         ret['data'].append({
             "created": 1671217299,
-            "id": "text-embedding-ada-002",
-            "object": "model",
-            "owned_by": "openai-internal",
+            "id":"text-embedding-ada-002",
+            "object":"model",
+            "owned_by":"openai-internal",
             "permission": [
                 {
                     "created": 1678892857,
-                    "id": "modelperm-Dbv2FOgMdlDjO8py8vEjD5Mi",
-                    "object": "model_permission",
+                    "id":"modelperm-Dbv2FOgMdlDjO8py8vEjD5Mi",
+                    "object":"model_permission",
                     "allow_create_engine": False,
                     "allow_sampling": True,
                     "allow_logprobs": True,
                     "allow_search_indices": True,
                     "allow_view": True,
                     "allow_fine_tuning": False,
-                    "organization": "*",
+                    "organization":"*",
                     "group": None,
                     "is_blocking": False
                 }
             ],
-            "root": "text-embedding-ada-002",
-            "parent": ""
+            "root":"text-embedding-ada-002",
+            "parent":""
         })
 
     return ret
@@ -118,32 +118,32 @@ def get_models():
 def generate_response(content: str, chat: bool = True):
     if chat:
         return {
-            "id": "chatcmpl-77PZm95TtxE0oYLRx3cxa6HtIDI7s",
-            "object": "chat.completion",
+            "id":"chatcmpl-77PZm95TtxE0oYLRx3cxa6HtIDI7s",
+            "object":"chat.completion",
             "created": 1682000966,
-            "model": "gpt-3.5-turbo-0301",
+            "model":"gpt-3.5-turbo-0301",
             "usage": {
                 "prompt_tokens": 0,
                 "completion_tokens": 0,
                 "total_tokens": 0,
             },
             "choices": [{
-                "message": {"role": "assistant", "content": content},
-                "finish_reason": "stop", "index": 0}
+                "message": {"role":"assistant", "content": content},
+                "finish_reason":"stop", "index": 0}
             ]
         }
     else:
         return {
-            "id": "cmpl-uqkvlQyYK7bGYrRHQ0eXlWi7",
-            "object": "text_completion",
+            "id":"cmpl-uqkvlQyYK7bGYrRHQ0eXlWi7",
+            "object":"text_completion",
             "created": 1589478378,
-            "model": "text-davinci-003",
+            "model":"text-davinci-003",
             "choices": [
                 {
                 "text": content,
                 "index": 0,
                 "logprobs": None,
-                "finish_reason": "stop"
+                "finish_reason":"stop"
                 }
             ],
             "usage": {
@@ -156,10 +156,10 @@ def generate_response(content: str, chat: bool = True):
 
 def generate_stream_response_start():
     return {
-        "id": "chatcmpl-77QWpn5cxFi9sVMw56DZReDiGKmcB",
-        "object": "chat.completion.chunk", "created": 1682004627,
-        "model": "gpt-3.5-turbo-0301",
-        "choices": [{"delta": {"role": "assistant"}, "index": 0, "finish_reason": None}]
+        "id":"chatcmpl-77QWpn5cxFi9sVMw56DZReDiGKmcB",
+        "object":"chat.completion.chunk", "created": 1682004627,
+        "model":"gpt-3.5-turbo-0301",
+        "choices": [{"delta": {"role":"assistant"}, "index": 0, "finish_reason": None}]
     }
 
 
@@ -167,10 +167,10 @@ def generate_stream_response_start():
 def generate_stream_response(content: str, chat: bool = True):
     if chat:
         return {
-            "id": "chatcmpl-77QWpn5cxFi9sVMw56DZReDiGKmcB",
-            "object": "chat.completion.chunk",
+            "id":"chatcmpl-77QWpn5cxFi9sVMw56DZReDiGKmcB",
+            "object":"chat.completion.chunk",
             "created": 1682004627,
-            "model": "gpt-3.5-turbo-0301",
+            "model":"gpt-3.5-turbo-0301",
             "choices": [{"delta": {"content": content}, "index": 0, "finish_reason": None}
                         ]}
     else:
@@ -186,16 +186,16 @@ def generate_stream_response(content: str, chat: bool = True):
                     "finish_reason": None,
                 }
             ],
-            "model": "text-davinci-003"
+            "model":"text-davinci-003"
         }
 
 
 def generate_stream_response_stop(chat: bool = True):
     if chat:
-        return {"id": "chatcmpl-77QWpn5cxFi9sVMw56DZReDiGKmcB",
-            "object": "chat.completion.chunk", "created": 1682004627,
-            "model": "gpt-3.5-turbo-0301",
-            "choices": [{"delta": {}, "index": 0, "finish_reason": "stop"}]
+        return {"id":"chatcmpl-77QWpn5cxFi9sVMw56DZReDiGKmcB",
+            "object":"chat.completion.chunk", "created": 1682004627,
+            "model":"gpt-3.5-turbo-0301",
+            "choices": [{"delta": {}, "index": 0, "finish_reason":"stop"}]
             }
     else:
         return {
@@ -224,21 +224,21 @@ def do_embeddings(body: EmbeddingsBody, request: Request, background_tasks: Back
     data = []
     if isinstance(body.input, str):
         data.append({
-            "object": "embedding",
+            "object":"embedding",
             "index": 0,
             "embedding": embeddings.tolist(),
         })
     else:
         for i, embed in enumerate(embeddings):
             data.append({
-                "object": "embedding",
+                "object":"embedding",
                 "index": i,
                 "embedding": embed.tolist(),
             })
     content = {
-        "object": "list",
+        "object":"list",
         "data": data,
-        "model": "text-embedding-ada-002-v2",
+        "model":"text-embedding-ada-002-v2",
         "usage": {
             "prompt_tokens": 0,
             "total_tokens": 0
